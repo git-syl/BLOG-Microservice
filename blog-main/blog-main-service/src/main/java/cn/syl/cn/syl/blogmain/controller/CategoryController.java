@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author: syl  Date: 2017/10/28 Email:nerosyl@live.com
  */
-@RestController
+@RestController()
+@RequestMapping("/category")
 public class CategoryController {
     @RequestMapping("/hello")
     public String hello(){

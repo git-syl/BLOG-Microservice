@@ -30,7 +30,6 @@ public class Application /*extends SpringBootServletInitializer*/ {
 
     public static void main(String[] args) throws InterruptedException {
         SpringApplication.run(Application.class, args);
-
 //        for (;;){
 //            Thread.sleep(1000);
 //        }
