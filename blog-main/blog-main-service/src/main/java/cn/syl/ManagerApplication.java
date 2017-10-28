@@ -1,6 +1,7 @@
 package cn.syl;
 
 
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -29,7 +30,9 @@ public class ManagerApplication /*extends SpringBootServletInitializer*/ {
 //    }
 
     public static void main(String[] args) throws InterruptedException {
-        SpringApplication.run(ManagerApplication.class, args);
+        SpringApplication application = new SpringApplication(ManagerApplication.class);
+        //application.setBannerMode(Banner.Mode.OFF);
+         application.run(args);
     }
 
 
