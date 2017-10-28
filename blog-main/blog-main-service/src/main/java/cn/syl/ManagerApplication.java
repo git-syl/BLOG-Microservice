@@ -17,9 +17,9 @@ import java.io.IOException;
 //@PropertySource(value = { "classpath:jdbc.properties", "classpath:env.properties",
 //        "classpath:httpclient.properties" })
 @ComponentScan(basePackages = "cn.syl")
-@ImportResource(value = "classpath:dubbo/dubbo-consumer1.xml")
+@ImportResource(value = "classpath:dubbo/dubbo-provide.xml")
 @SpringBootApplication
-public class Application /*extends SpringBootServletInitializer*/ {
+public class ManagerApplication /*extends SpringBootServletInitializer*/ {
 
   //  for tomcat
 //    @Override
@@ -29,10 +29,7 @@ public class Application /*extends SpringBootServletInitializer*/ {
 //    }
 
     public static void main(String[] args) throws InterruptedException {
-        SpringApplication.run(Application.class, args);
-//        for (;;){
-//            Thread.sleep(1000);
-//        }
+        SpringApplication.run(ManagerApplication.class, args);
     }
 
 

@@ -17,6 +17,7 @@
         <module>blog-main-pojo</module>
     </modules>
     <artifactId>blog-main</artifactId>
+    <description>聚合工程</description>
 
 
 

@@ -3,15 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>blog-main</artifactId>
+        <artifactId>blog-parent</artifactId>
         <groupId>cn.syl</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../blog-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <description>blog-main的web层</description>
     <packaging>war</packaging>
 
-    <artifactId>blog-main-service</artifactId>
-    <description>服务层 向dubbo注册服务,向blog-main-web提供RPC</description>
+    <artifactId>blog-main-web</artifactId>
 
     <dependencies>
         <dependency>
@@ -20,41 +21,26 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!--&lt;!&ndash; MySql &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>mysql</groupId>-->
-            <!--<artifactId>mysql-connector-java</artifactId>-->
-            <!--<scope>runtime</scope>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash;  spring data jpa&ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-data-jpa</artifactId>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-jdbc</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
         <!-- dubbo相关,并排除一些 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
             <exclusions>
-                    <exclusion>
-                        <!-- 排除传递spring依赖 -->
-                        <artifactId>spring</artifactId>
-                        <groupId>org.springframework</groupId>
-                    </exclusion>
+                <exclusion>
+                    <!-- 排除传递spring依赖 -->
+                    <artifactId>spring</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
                 <exclusion>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring</artifactId>
@@ -87,30 +73,31 @@
 
     </dependencies>
     <build>
-    <plugins>
-        <!-- 资源文件拷贝插件 -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <configuration>
-                <encoding>UTF-8</encoding>
-            </configuration>
-        </plugin>
-        <!-- java编译插件 -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-                <encoding>UTF-8</encoding>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-        </plugin>
-    </plugins>
+        <plugins>
+            <!-- 资源文件拷贝插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- java编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
+
 
 </project>
