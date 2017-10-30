@@ -26,4 +26,12 @@ public class CategoryController {
         return "hello";
     }
 
+    //测试添加redis集群
+    @RequestMapping("/t1")
+    public String t1(){
+        categoryService.addJdisCache();
+        return categoryService.getJdisCache();
+    }
+
+
 }
