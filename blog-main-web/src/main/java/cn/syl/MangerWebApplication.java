@@ -17,15 +17,16 @@ import org.springframework.context.annotation.ImportResource;
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @ImportResource(value = "classpath:dubbo/dubbo-consumer.xml")
 @SpringBootApplication
-public class MangerWebApplication   extends SpringBootServletInitializer {
+//如果在tomcat运行需要打开下面的注释
+public class MangerWebApplication  /* extends SpringBootServletInitializer*/ {
     public static void main(String args[]){
         SpringApplication application = new SpringApplication(MangerWebApplication.class);
         //application.setBannerMode(Banner.Mode.OFF);
         application.run(args);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(MangerWebApplication.class);
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return builder.sources(MangerWebApplication.class);
+//    }
 }

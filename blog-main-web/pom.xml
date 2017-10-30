@@ -10,7 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <description>blog-main的web层</description>
-    <packaging>war</packaging>
+    <!--tomcat下打包,需要打开这个注释-->
+    <!--<packaging>war</packaging>-->
 
     <artifactId>blog-main-web</artifactId>
 
@@ -24,12 +25,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--部署spring boot到tomcat-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!--部署spring boot到tomcat,需要打开这个注释-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
         <!-- dubbo相关,并排除一些 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -91,15 +92,22 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!--用于打包jar-->
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-            <!--</plugin>-->
-            <!--解决打包war无web.xml报错-->
+            <!--用于打包jar,使用tomcat不需要这个-->
             <plugin>
-                <artifactId>maven-war-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+            <!--解决打包war无web.xml报错-->
+            <!--<plugin>-->
+                <!--<artifactId>maven-war-plugin</artifactId>-->
+            <!--</plugin>-->
         </plugins>
 
     </build>
