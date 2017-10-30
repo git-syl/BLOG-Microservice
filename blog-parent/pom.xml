@@ -38,6 +38,13 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-redis -->
+            <!--todo:迁移至:Spring Boot Data Redis Starter-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-redis</artifactId>
+                <version>1.4.7.RELEASE</version>
+            </dependency>
             <!--lombok注解库-->
             <dependency>
                 <groupId>org.projectlombok</groupId>

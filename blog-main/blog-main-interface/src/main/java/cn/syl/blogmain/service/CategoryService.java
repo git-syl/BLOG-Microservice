@@ -7,4 +7,6 @@ import cn.syl.blogmain.pojo.Category;
  */
 public interface CategoryService {
     void  saveCategory(Category category);
+    void  addJdisCache();
+    String getJdisCache();
 }
