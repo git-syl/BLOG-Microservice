@@ -74,7 +74,7 @@
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
-            <!--低版本tomcat启动问题-->
+            <!--spring boot 低版本tomcat启动问题-->
             <!--<dependency>-->
             <!--<groupId>org.apache.tomcat</groupId>-->
             <!--<artifactId>tomcat-juli</artifactId>-->
@@ -109,7 +109,7 @@
                     </configuration>
                 </plugin>
                 <!--在添加了该插件之后，当运行“mvn package”进行打包时，会打包成一个可以直接运行的 JAR 文件，-->
-                <!--使用“java -jar”命令就可以直接运行。这在很大程度上简化了应用的部署，只需要安装了 JRE 就可以运行。-->
+                <!--使用“java -jar”命令就可以直接运行。-->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
