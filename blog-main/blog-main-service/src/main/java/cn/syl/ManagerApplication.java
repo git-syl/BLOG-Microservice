@@ -22,9 +22,10 @@ import java.io.IOException;
 @ComponentScan(basePackages = "cn.syl")
 @ImportResource(value = "classpath:dubbo/dubbo-provide.xml")
 @SpringBootApplication
+//运行tomcat中需要 打开这些注释
 public class ManagerApplication /*extends SpringBootServletInitializer*/ {
 
-  //  for tomcat
+    //  for tomcat
 //    @Override
 //    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 //        //tomcat

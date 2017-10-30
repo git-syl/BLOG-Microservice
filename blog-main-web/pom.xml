@@ -92,10 +92,10 @@
                 </configuration>
             </plugin>
             <!--用于打包jar-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--</plugin>-->
             <!--解决打包war无web.xml报错-->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
