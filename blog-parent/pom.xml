@@ -9,16 +9,14 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <!-- 集中定义依赖版本号 -->
+    <!-- 依赖版本号 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-
+        <mv.version>3.0.0</mv.version>
         <spring.boot.version>1.5.8.RELEASE</spring.boot.version>
-
         <mysql.connecotor.version>6.0.5</mysql.connecotor.version>
         <lombok.version>1.16.18</lombok.version>
-
         <dubbo.version>2.5.3</dubbo.version>
         <zookeeper.version>3.4.7</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
@@ -40,21 +38,14 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
-            <!--  spring data jpa-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-
+            <!--lombok注解库-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
-
-            <!-- dubbo相关 -->
+            <!-- dubbo,zookeeper相关 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
@@ -77,42 +68,31 @@
                 <version>${mysql.connecotor.version}</version>
                 <scope>runtime</scope>
             </dependency>
-
-
+            <!--  spring data jpa-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <!--低版本tomcat启动问题-->
+            <!--<dependency>-->
+            <!--<groupId>org.apache.tomcat</groupId>-->
+            <!--<artifactId>tomcat-juli</artifactId>-->
+            <!--<version>${tomcat.version}</version>-->
+            <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
     <!--dependencyManagement仅管理版本号-->
 
     <build>
         <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <!-- 资源文件拷贝插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!-- java编译插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
         <pluginManagement>
             <plugins>
-                <!-- 资源文件拷贝插件 -->
+                <!-- 资源文件拷贝插件,解决xml找不到的情况 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
                     <configuration>
                         <encoding>UTF-8</encoding>
                     </configuration>
@@ -121,16 +101,26 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.2</version>
                     <configuration>
                         <source>1.8</source>
                         <target>1.8</target>
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
+                <!--在添加了该插件之后，当运行“mvn package”进行打包时，会打包成一个可以直接运行的 JAR 文件，-->
+                <!--使用“java -jar”命令就可以直接运行。这在很大程度上简化了应用的部署，只需要安装了 JRE 就可以运行。-->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring.boot.version}</version>
+                </plugin>
+                <!--用于解决没有web.xml报错-->
+                <!--[ERROR] Failed to execute goal org.apache.maven.plugins:maven-war-plugin:2.2:war (default-war) on project provider: Error assembling WAR: webxml attribute is required-->
+                <!--(or pre-existing WEB-INF/web.xml if executing in update mode) -> [Help 1]-->
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.0.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>

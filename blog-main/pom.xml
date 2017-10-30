@@ -16,9 +16,15 @@
         <module>blog-main-dao</module>
         <module>blog-main-pojo</module>
     </modules>
+
     <artifactId>blog-main</artifactId>
     <description>聚合工程</description>
-
-
-
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <!--<version>3.0.0</version>-->
+            </plugin>
+        </plugins>
+    </build>
 </project>
