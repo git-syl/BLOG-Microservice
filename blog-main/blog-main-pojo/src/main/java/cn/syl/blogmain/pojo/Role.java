@@ -7,32 +7,35 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 /**
- * @author: syl  Date: 2017/10/28 Email:nerosyl@live.com
+ * @author: syl  Date: 2017/10/31 Email:nerosyl@live.com
  */
-///java.lang.IllegalStateException: Serialized class cn.syl.blogmain.pojo.Category must implement java.io.Serializable
 @Entity
-@ToString
 @NoArgsConstructor
-public class Category implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+@ToString
+public class Role implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
     private Long id;
 
-    @Column(length = 50) @Getter @Setter
+    @Column(length = 64) @Getter @Setter
     private String name;
-
-    //0为根节点
-    @Column(length = 20) @Getter @Setter
-    private String parentId;
-
-    /**
-     *  true有父级别菜单 false根菜单
-     */
+    @Column(length = 64) @Getter @Setter
+    private String code;//权限关键字
     @Column @Getter @Setter
-    private Boolean hasParent;
+    private String description;
+
+@ManyToMany(mappedBy = "roles",cascade = CascadeType.REFRESH)
+@Getter @Setter
+    private Set<User> users = new HashSet<>(0);
+
+    @ManyToMany
+    @JoinTable(name = "role_authority",joinColumns = @JoinColumn(name = "role_id"),inverseJoinColumns = @JoinColumn(name = "authority_id")
+    )
+    private Set<Authority> authorities = new HashSet<>(0);
 
     //common:
     /**
