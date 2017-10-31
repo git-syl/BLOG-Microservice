@@ -52,6 +52,11 @@
                 <version>1.5.8.RELEASE</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
 
             <!--lombok注解库-->
             <dependency>

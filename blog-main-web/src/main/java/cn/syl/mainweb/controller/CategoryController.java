@@ -2,6 +2,8 @@ package cn.syl.mainweb.controller;
 
 import cn.syl.blogmain.pojo.Category;
 import cn.syl.blogmain.service.CategoryService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,8 +12,9 @@ import javax.annotation.Resource;
 /**
  * @author: syl  Date: 2017/10/28 Email:nerosyl@live.com
  */
-@RestController()
-@RequestMapping("/category")
+//@RestController()
+@Controller
+@RequestMapping("/admin")
 public class CategoryController {
     //idea 不能检测RPC的注入??
     @Resource
@@ -26,11 +29,10 @@ public class CategoryController {
         return "hello";
     }
 
-    //测试添加redis集群
     @RequestMapping("/t1")
-    public String t1(){
-        categoryService.addJdisCache();
-        return categoryService.getJdisCache();
+    public String index(Model model){
+        model.addAttribute("name","username");
+      return "hello";
     }
 
 
