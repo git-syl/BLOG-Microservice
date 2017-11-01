@@ -36,14 +36,16 @@ public class Authority implements Serializable {
     private Authority parentFunction;
 
     //子权限
-    @OneToMany(mappedBy = "parentFunction")
-    //@JoinColumn(name = "pid")//Caused by: org.hibernate.AnnotationException: Associations marked as mappedBy must not define database mappings like @JoinTable or @JoinColumn: cn.syl.blogmain.pojo.Authority.children
+    // @OneToMany(mappedBy = "parentFunction")
+    @OneToMany()
+    @JoinColumn(name = "pid")
+//Caused by: org.hibernate.AnnotationException: Associations marked as mappedBy must not define database mappings like @JoinTable or @JoinColumn: cn.syl.blogmain.pojo.Authority.children
     @Fetch(FetchMode.SUBSELECT)
     @Getter
     @Setter
     private Set<Authority> children = new HashSet<>(0);
 
-//     @Column @Getter @Setter
+    //     @Column @Getter @Setter
 //     private String pId;//父权限的id
     @Column(length = 64)
     @Getter
@@ -59,11 +61,11 @@ public class Authority implements Serializable {
     @Setter
     private String url;
 
-    //是否生成菜单 1表示生成，0表示不生成
+    //是否生成菜单 true表示生成，false表示不生成
     @Column
     @Getter
     @Setter
-    private Byte generatorMenu = 1;
+    private Boolean generatorMenu = true;
 
     //@ManyToMany(mappedBy = "authorities")
     @ManyToMany

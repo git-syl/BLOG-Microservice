@@ -15,46 +15,78 @@ import java.util.*;
 @Entity
 @NoArgsConstructor
 @ToString
-public class User  implements Serializable{
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter
+    @Getter
+    @Setter
     private Long id;
 
-    @Column(length = 16) @Getter @Setter
+    @Column(length = 16)
+    @Getter
+    @Setter
+    private String username;
+
+    @Column(length = 16)
+    @Getter
+    @Setter
+    private String name;
+
+    @Column(length = 16)
+    @Getter
+    @Setter
     private String password;
-    @Column @Getter @Setter
+    @Column
+    @Getter
+    @Setter
     private Date birthday;
-    @Column(length = 4) @Getter @Setter
+    @Column(length = 4)
+    @Getter
+    @Setter
     private String gender;
-    @Column(length = 64) @Getter @Setter
+    @Column(length = 64)
+    @Getter
+    @Setter
     private String telephone;
-    @Column(length = 128) @Getter @Setter
+    @Column(length = 128)
+    @Getter
+    @Setter
     private String remark;
 
     @ManyToMany
-    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id"))
-    @Getter @Setter
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Getter
+    @Setter
     private Set<Role> roles = new HashSet<>(0);
 
     //common:
     /**
-     *  -1已经删除 0禁用 1启用
+     * -1已经删除 0禁用 1启用
      */
-    @Column @Getter @Setter
-    private Byte status=1;
+    @Column
+    @Getter
+    @Setter
+    private Byte status = 1;
 
-    @Column @Getter @Setter
-    private Integer sortOrder=1;
+    @Column
+    @Getter
+    @Setter
+    private Integer sortOrder = 1;
 
-    @Column(length = 64) @Getter @Setter
+    @Column(length = 64)
+    @Getter
+    @Setter
     private String createBy;
 
-    @Column @Getter @Setter
+    @Column
+    @Getter
+    @Setter
     private Date createTime;
 
-    @Column @Getter @Setter
+    @Column
+    @Getter
+    @Setter
     private Date updateTime;
 
 }

@@ -18,42 +18,65 @@ import java.util.*;
 public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter
+    @Getter
+    @Setter
     private Long id;
 
-    @Column(length = 64) @Getter @Setter
+    @Column(length = 64)
+    @Getter
+    @Setter
     private String name;
-    @Column(length = 64) @Getter @Setter
+    @Column(length = 64)
+    @Getter
+    @Setter
     private String code;//权限关键字
-    @Column @Getter @Setter
+    @Column
+    @Getter
+    @Setter
     private String description;
 
-@ManyToMany(mappedBy = "roles",cascade = CascadeType.REFRESH)
-@Getter @Setter
+    //@ManyToMany(mappedBy = "roles",cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Getter
+    @Setter
     private Set<User> users = new HashSet<>(0);
 
-    @ManyToMany
-    @JoinTable(name = "role_authority",joinColumns = @JoinColumn(name = "role_id"),inverseJoinColumns = @JoinColumn(name = "authority_id")
+    @ManyToMany(cascade = CascadeType.ALL)//对角色操作 级联角色的权限
+    @JoinTable(name = "role_authority", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
+    @Getter
+    @Setter
     private Set<Authority> authorities = new HashSet<>(0);
 
     //common:
     /**
-     *  -1已经删除 0禁用 1启用
+     * -1已经删除 0禁用 1启用
      */
-    @Column @Getter @Setter
-    private Byte status=1;
+    @Column
+    @Getter
+    @Setter
+    private Byte status = 1;
 
-    @Column @Getter @Setter
-    private Integer sortOrder=1;
+    @Column
+    @Getter
+    @Setter
+    private Integer sortOrder = 1;
 
-    @Column(length = 64) @Getter @Setter
+    @Column(length = 64)
+    @Getter
+    @Setter
     private String createBy;
 
-    @Column @Getter @Setter
+    @Column
+    @Getter
+    @Setter
     private Date createTime;
 
-    @Column @Getter @Setter
+    @Column
+    @Getter
+    @Setter
     private Date updateTime;
 
 
