@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Resource
     private CategoryRepository categoryRepository;
 
-    @Autowired
+   // @Autowired
     private JedisCluster jedisCluster;
 
     @Override

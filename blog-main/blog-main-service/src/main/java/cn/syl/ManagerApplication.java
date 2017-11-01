@@ -10,6 +10,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ import java.io.IOException;
 //@PropertySource(value = { "classpath:jdbc.properties", "classpath:env.properties",
 //        "classpath:httpclient.properties" })
 @ComponentScan(basePackages = "cn.syl")
+@PropertySource(value = {"classpath:dubbo/dubbo.properties"})
 @ImportResource(value = "classpath:dubbo/dubbo-provide.xml")
 @SpringBootApplication
 //运行tomcat中需要 打开这些注释

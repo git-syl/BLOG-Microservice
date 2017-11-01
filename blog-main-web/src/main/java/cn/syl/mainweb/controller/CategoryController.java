@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 @RequestMapping("/admin")
 public class CategoryController {
     //idea 不能检测RPC的注入??
-    @Resource
+   // @Resource
     private CategoryService categoryService;
     @RequestMapping("/hello")
     public String hello(){

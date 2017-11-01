@@ -14,8 +14,13 @@ import java.util.*;
  */
 @Entity
 @NoArgsConstructor
-@ToString
+//@ToString
+//todo:#org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: cn.syl.blogmain.pojo.User.roles, could not initialize proxy - no Session
 public class User implements Serializable {
+
+//    public User() {
+//    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -53,11 +58,11 @@ public class User implements Serializable {
     @Setter
     private String remark;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)  //todo: DUBBO懒加载
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @Getter
-    @Setter
+//    @Getter
+//    @Setter
     private Set<Role> roles = new HashSet<>(0);
 
     //common:
@@ -89,4 +94,11 @@ public class User implements Serializable {
     @Setter
     private Date updateTime;
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }

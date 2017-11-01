@@ -13,6 +13,7 @@
 	<dubbo:application name="blog-main-web"/>
 	<dubbo:registry protocol="zookeeper" address="192.168.123.215:2181"/>
 	<dubbo:reference interface="cn.syl.blogmain.service.CategoryService" id="categoryServiceImpl" />
+	<dubbo:reference interface="cn.syl.blogmain.service.UserService" id="userServiceImpl" />
 
 
 

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,8 +15,11 @@ import java.util.*;
  */
 @Entity
 @NoArgsConstructor
-@ToString
+//@ToString
 public class Role implements Serializable {
+//    public Role() {
+//    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -35,15 +39,18 @@ public class Role implements Serializable {
     @Setter
     private String description;
 
+    //todo:
     //@ManyToMany(mappedBy = "roles",cascade = CascadeType.PERSIST)
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+   // @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @Getter
-    @Setter
+  //  @Getter
+   // @Setter
     private Set<User> users = new HashSet<>(0);
 
-    @ManyToMany(cascade = CascadeType.ALL)//对角色操作 级联角色的权限
+  //  @ManyToMany(cascade = CascadeType.ALL)//对角色操作 级联角色的权限
+    @ManyToMany(fetch = FetchType.EAGER)//对角色操作 级联角色的权限
     @JoinTable(name = "role_authority", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
     @Getter
@@ -79,5 +86,11 @@ public class Role implements Serializable {
     @Setter
     private Date updateTime;
 
+    public Set<User> getUsers() {
+        return users;
+    }
 
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 }

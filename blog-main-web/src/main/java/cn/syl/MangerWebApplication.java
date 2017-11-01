@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 
 //spring boot不爽的地方 非要提供datasource ??
+@Configuration
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @ImportResource(value = "classpath:dubbo/dubbo-consumer.xml")
 @SpringBootApplication
