@@ -1,6 +1,7 @@
 package cn.syl.blogmain.pojo;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 ///java.lang.IllegalStateException: Serialized class cn.syl.blogmain.pojo.Category must implement java.io.Serializable
 @Entity
 @ToString
+@NoArgsConstructor
 public class Category implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
