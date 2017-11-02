@@ -13,7 +13,7 @@ import java.util.regex.PatternSyntaxException;
  *
  * @author: syl  Date: 2017/10/30 Email:nerosyl@live.com
  */
-@Configuration //相当于定义个配置文件applicationContext.xml
+//@Configuration //相当于定义个配置文件applicationContext.xml
 public class RedisClusterConfig {
 
     @Value("${spring.redis.cluster.nodes}")

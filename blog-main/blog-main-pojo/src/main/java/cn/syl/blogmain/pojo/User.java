@@ -16,6 +16,10 @@ import java.util.*;
 @NoArgsConstructor
 @ToString
 public class User implements Serializable {
+
+//    public User() {
+//    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -53,6 +57,7 @@ public class User implements Serializable {
     @Setter
     private String remark;
 
+   // @ManyToMany(fetch = FetchType.EAGER)
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

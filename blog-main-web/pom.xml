@@ -29,6 +29,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
+        <!-- shiro spring. -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
         <!--部署spring boot到tomcat,需要打开这个注释-->
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->

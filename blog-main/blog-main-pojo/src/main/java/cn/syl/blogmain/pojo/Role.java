@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,6 +17,9 @@ import java.util.*;
 @NoArgsConstructor
 @ToString
 public class Role implements Serializable {
+//    public Role() {
+//    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -36,6 +40,7 @@ public class Role implements Serializable {
     private String description;
 
     //@ManyToMany(mappedBy = "roles",cascade = CascadeType.PERSIST)
+    //@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -43,7 +48,8 @@ public class Role implements Serializable {
     @Setter
     private Set<User> users = new HashSet<>(0);
 
-    @ManyToMany(cascade = CascadeType.ALL)//对角色操作 级联角色的权限
+  //  @ManyToMany(cascade = CascadeType.ALL)//对角色操作 级联角色的权限
+    @ManyToMany
     @JoinTable(name = "role_authority", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
     @Getter
@@ -78,6 +84,5 @@ public class Role implements Serializable {
     @Getter
     @Setter
     private Date updateTime;
-
 
 }
