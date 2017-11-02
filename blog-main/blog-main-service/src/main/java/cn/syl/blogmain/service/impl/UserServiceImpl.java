@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Transactional//解决懒加载
+    //@Transactional//解决懒加载
     public User findUserByUsername(String username) {
         User user = userRepository.findUserByUsername(username);
         return user;

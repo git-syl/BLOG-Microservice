@@ -17,8 +17,8 @@
         <spring.boot.version>1.5.8.RELEASE</spring.boot.version>
         <mysql.connecotor.version>6.0.5</mysql.connecotor.version>
         <lombok.version>1.16.18</lombok.version>
-        <dubbo.version>2.5.3</dubbo.version>
-        <zookeeper.version>3.4.7</zookeeper.version>
+        <dubbo.version>2.5.6</dubbo.version>
+        <zookeeper.version>3.4.9</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
     </properties>
     <dependencyManagement>

@@ -7,15 +7,16 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-
+	<!--old:192.168.123.215-->
 
 <!-- 使用dubbo发布服务 -->
 	<!-- 提供方应用信息，用于计算依赖关系 -->
 	<dubbo:application name="blog-main" />
 	<dubbo:registry protocol="zookeeper"
-					address="192.168.123.215:2181" />
+					address="192.168.123.120:2181" />
 	<!-- 用dubbo协议在20880端口暴露服务 -->
-	<dubbo:protocol name="dubbo" port="20880" />
+	<!--<dubbo:protocol name="dubbo" port="20880"  />-->
+	<dubbo:protocol name="dubbo" port="20880" serialization="java" />
 	<!-- 声明需要暴露的服务接口 -->
 	<dubbo:service interface="cn.syl.blogmain.service.CategoryService" ref="categoryServiceImpl" timeout="1500000" />
 	<dubbo:service interface="cn.syl.blogmain.service.UserService" ref="userServiceImpl" timeout="1500000" />

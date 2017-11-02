@@ -37,7 +37,7 @@ public class Authority implements Serializable {
 
     //子权限
     // @OneToMany(mappedBy = "parentFunction")
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumn(name = "pid")
 //Caused by: org.hibernate.AnnotationException: Associations marked as mappedBy must not define database mappings like @JoinTable or @JoinColumn: cn.syl.blogmain.pojo.Authority.children
     @Fetch(FetchMode.SUBSELECT)
@@ -74,7 +74,7 @@ public class Authority implements Serializable {
     private Boolean generatorMenu = true;
 
   //  @ManyToMany(mappedBy = "authorities")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "role_authority", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id")
     )
     @Getter

@@ -21,7 +21,7 @@ import java.io.IOException;
 //@PropertySource(value = { "classpath:jdbc.properties", "classpath:env.properties",
 //        "classpath:httpclient.properties" })
 @ComponentScan(basePackages = "cn.syl")
-@PropertySource(value = {"classpath:dubbo/dubbo.properties"})
+//@PropertySource(value = {"classpath:dubbo/dubbo.properties"})
 @ImportResource(value = "classpath:dubbo/dubbo-provide.xml")
 @SpringBootApplication
 //运行tomcat中需要 打开这些注释
