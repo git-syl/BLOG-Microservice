@@ -12,6 +12,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.Resource;
 
@@ -24,7 +25,10 @@ public class MyShiroRealm extends AuthorizingRealm {
   //  UserRepository userRepository;
 
     @Resource
-    UserService userService;
+    private UserService userService;
+
+    @Value("${password.salt}")
+    String salt;
 
     //验证
     @Override
@@ -39,11 +43,23 @@ public class MyShiroRealm extends AuthorizingRealm {
             return null;
         }
 
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                username, //用户名
-                user.getPassword(), //密码
-                getName()  //realm name
-        );
+        System.err.println(salt);
+
+        SimpleAuthenticationInfo authenticationInfo =
+                new SimpleAuthenticationInfo(
+                        username, //用户名
+                        user.getPassword(), //密码
+                        ByteSource.Util.bytes(username+salt),//salt=username+salt
+                        getName()  //realm name
+                );
+
+        //或:
+//        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+//                username, //用户名
+//                user.getPassword(), //密码
+//                getName()  //realm name
+//        );
+
         return authenticationInfo;
     }
 
