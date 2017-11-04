@@ -39,6 +39,12 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>true</scope>
+        </dependency>
         <!--部署spring boot到tomcat,需要打开这个注释-->
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->
@@ -117,6 +123,10 @@
                         </goals>
                     </execution>
                 </executions>
+                <!--支持devtools-->
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
             </plugin>
             <!--解决打包war无web.xml报错-->
             <!--<plugin>-->

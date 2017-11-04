@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
 </head>
 <body>
 错误信息：<h4>${msg!}</h4>

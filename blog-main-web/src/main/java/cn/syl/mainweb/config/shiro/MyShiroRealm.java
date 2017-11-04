@@ -21,16 +21,14 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
+ * 自定义Realm
  * @author: syl  Date: 2017/11/1 Email:nerosyl@live.com
  */
 public class MyShiroRealm extends AuthorizingRealm {
 
-  //  @Resource
-  //  UserRepository userRepository;
 
     @Resource
     private UserService userService;
@@ -77,20 +75,23 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        //为用户授予权限
+        //为用户授予权限 staff-list
         //info.addStringPermission("staff-list");
         //获取当前登录对象
-//        User user = (User) SecurityUtils.getSubject().getPrincipal();//User user2 = (User) principals.getPrimaryPrincipal();
+        //User user = (User) SecurityUtils.getSubject().getPrincipal();//User user2 = (User) principals.getPrimaryPrincipal();
+
         User user = (User) principalCollection.fromRealm(this.getName()).iterator().next();//根据传入的值选择realm
 
         if ("admin".equals(user.getUsername())) {
+
             Iterable<Authority> iterable = authorityService.findAll();
             iterable.forEach(auriter->{
                 info.addStringPermission(auriter.getCode());
                 System.err.println("admin有权限:"+auriter.getCode());
             });
-            //return info;
+
         }else {
+
             Set<Authority> authoritySet = new HashSet<>(0);
             //根据用户id查询他的权限
             User userEntity = userService.findUserByUsername(user.getUsername());
@@ -103,6 +104,7 @@ public class MyShiroRealm extends AuthorizingRealm {
                 info.addStringPermission(authority.getCode());
                 System.err.println("有权限:"+authority.getCode());
             });
+
         }
 
         return info;

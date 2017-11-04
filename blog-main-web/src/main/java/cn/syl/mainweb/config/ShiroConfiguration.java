@@ -19,21 +19,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * Shiro权限配置类
  * @author: syl  Date: 2017/11/1 Email:nerosyl@live.com
  */
 @Configuration
-public class ShiroConfiguration {//ShiroConfiguration {
+public class ShiroConfiguration {
 
-//    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
-//        System.out.println("ShiroConfiguration.shirFilter()");
-@Bean
+    /**
+     * 配置shiro框架过滤器工厂
+     * 设置一些过滤器
+     */
+    @Bean
 public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
     System.out.println("ShiroConfiguration.shirFilter()");
-      //  ShiroFilterFactoryBean shiroFilterFactoryBean  = new ShiroFilterFactoryBean();
         ShiroFilterFactoryBean shiroFilterFactoryBean  = new ShiroFilterFactoryBean();
-
-        // 必须设置 SecurityManager
-       // shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         // 必须设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -46,7 +45,11 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
 
         //<!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-        filterChainDefinitionMap.put("/**", "authc");
+
+        //静态资源
+        filterChainDefinitionMap.put("/css/**","anon");
+        filterChainDefinitionMap.put("/js/**","anon");
+        filterChainDefinitionMap.put("/images/**","anon");
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/login");
@@ -54,14 +57,17 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        //
+        filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
 
     /**
-     * 身份认证realm;
-     * (这个需要自己写，账号密码校验；权限等)
+     * 自定义身份认证realm;
+     * 1.注入密码验证规则 hashedCredentialsMatcher
+     * 2.向securityManager注入这个自定义的realm
      * @return
      */
     @Bean
@@ -78,7 +84,7 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
         //设置realm.
         securityManager.setRealm(myShiroRealm());
         //注入缓存管理器;
-        securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;
+        securityManager.setCacheManager(ehCacheManager());
         return securityManager;
     }
 
@@ -93,9 +99,8 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
     public /*SimpleCredentialsMatcher*/HashedCredentialsMatcher hashedCredentialsMatcher(){
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
 
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
-
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");//MD5算法;
+        hashedCredentialsMatcher.setHashIterations(2);//散列的次数
         return hashedCredentialsMatcher;
 
 //或:
@@ -122,10 +127,7 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
     }
 
     /**
-     *  开启shiro aop注解支持.
-     *  使用代理方式;所以需要开启代码支持;
-     * @param securityManager
-     * @return
+     *  开启shiro aop注解支持: eg:@RequiresPermissions("userInfo:ggg")//权限管理;
      */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
@@ -137,8 +139,7 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
     /**
      * shiro缓存管理器;
      * 需要注入对应的其它的实体类中：
-     * 1、安全管理器：securityManager
-     * @return
+     * 安全管理器：securityManager
      */
     @Bean
     public EhCacheManager ehCacheManager(){
