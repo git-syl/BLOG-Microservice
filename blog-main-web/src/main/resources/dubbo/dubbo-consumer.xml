@@ -14,6 +14,7 @@
 	<dubbo:registry protocol="zookeeper" address="192.168.123.120:2181"/>
 	<dubbo:reference interface="cn.syl.blogmain.service.CategoryService" id="categoryServiceImpl" />
 	<dubbo:reference interface="cn.syl.blogmain.service.UserService" id="userServiceImpl" />
+	<dubbo:reference interface="cn.syl.blogmain.service.AuthorityService" id="authorityServiceImpl" />
 
 
 

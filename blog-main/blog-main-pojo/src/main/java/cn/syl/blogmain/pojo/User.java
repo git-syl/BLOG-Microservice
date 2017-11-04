@@ -14,7 +14,7 @@ import java.util.*;
  */
 @Entity
 @NoArgsConstructor
-@ToString
+//@ToString
 public class User implements Serializable {
 
 //    public User() {

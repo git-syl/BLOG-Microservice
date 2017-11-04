@@ -6,8 +6,10 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
@@ -75,6 +77,8 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         //设置realm.
         securityManager.setRealm(myShiroRealm());
+        //注入缓存管理器;
+        securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;
         return securityManager;
     }
 
@@ -115,6 +119,33 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
 
     public static String md5(String password, String salt){
         return new Md5Hash(password,salt,2).toString();
+    }
+
+    /**
+     *  开启shiro aop注解支持.
+     *  使用代理方式;所以需要开启代码支持;
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    }
+
+    /**
+     * shiro缓存管理器;
+     * 需要注入对应的其它的实体类中：
+     * 1、安全管理器：securityManager
+     * @return
+     */
+    @Bean
+    public EhCacheManager ehCacheManager(){
+        System.out.println("ShiroConfiguration.getEhCacheManager()");
+        EhCacheManager cacheManager = new EhCacheManager();
+        cacheManager.setCacheManagerConfigFile("classpath:shiro/ehcache-shiro.xml");
+        return cacheManager;
     }
 
 

@@ -34,6 +34,11 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
         </dependency>
+        <!-- shiro ehcache -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
         <!--部署spring boot到tomcat,需要打开这个注释-->
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->

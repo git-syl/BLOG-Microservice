@@ -10,8 +10,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author: syl  Date: 2017/11/1 Email:nerosyl@live.com
@@ -75,8 +78,44 @@ public class InsertDataTest {
         user.setPassword("1234");
         user.getRoles().add(role);
 
-        userRepository.save(user);
+        User user1 = new User();
+        user.setUsername("u1");
+        user.setPassword("1234");
+        user.getRoles().add(role1);
 
+        userRepository.save(user);
+        userRepository.save(user1);
 
     }
+
+    @Test
+    @Transactional//no session
+    public void  testfindAuthByUserId(){
+
+        User user = userRepository.findOne(1L);
+        Set<Role> roles = user.getRoles();
+        Set<Authority> authoritySet = new HashSet<>(0);
+        for (Role role : roles) {
+            Set<Authority> authorities = role.getAuthorities();
+            authoritySet.addAll(authorities);
+        }
+
+        //test:
+
+        authoritySet.forEach(aur->{
+            System.out.println("admin有权限:"+aur.getCode());
+        });
+
+
+
+//        for (Role role : roles) {
+//            Set<Authority> authorities = role.getAuthorities();
+//            for (Authority authority : authorities) {
+//                System.out.println("admin有权限:"+authority.getName());
+//                authoritySet.add(authority);
+//            }
+//        }
+
+    }
+
 }

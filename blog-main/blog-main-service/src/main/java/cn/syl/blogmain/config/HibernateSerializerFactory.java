@@ -14,6 +14,7 @@ import java.util.Map;
 /**
  * @author: syl  Date: 2017/11/2 Email:nerosyl@live.com
  */
+@Deprecated
 public class HibernateSerializerFactory extends SerializerFactory {
 
     private HibernateListSerializer listSerializer = new HibernateListSerializer();
