@@ -12,10 +12,12 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -54,8 +56,31 @@ public class HomeController {
         // user放入session
         request.getSession().setAttribute("loginUser", user);
         return "index";
+    }
 
+    /**
+     * 用户添加;
+     * @return
+     */
+    @RequestMapping("/userAdd")
+    @RequiresPermissions("userInfo:add")//权限管理;
+    @ResponseBody
+    public String userInfoAdd(){
+        return "userInfoAdd";
+    }
 
+    @RequestMapping("/userView")
+    @RequiresPermissions("userInfo:view")//权限管理;
+    @ResponseBody
+    public String userInfoView(){
+        return "userView";
+    }
+
+    @RequestMapping("/userGG")
+    @RequiresPermissions("userInfo:ggg")//权限管理;
+    @ResponseBody
+    public String userInfoGGG(){
+        return "userInfoGG";
     }
 
 }
