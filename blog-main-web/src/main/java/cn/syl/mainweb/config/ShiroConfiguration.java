@@ -50,6 +50,10 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
         filterChainDefinitionMap.put("/css/**","anon");
         filterChainDefinitionMap.put("/js/**","anon");
         filterChainDefinitionMap.put("/images/**","anon");
+        filterChainDefinitionMap.put("/lib/**","anon");
+
+        filterChainDefinitionMap.put("/login","anon");
+        filterChainDefinitionMap.put("/","anon");
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/login");
@@ -58,7 +62,7 @@ public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager){
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         //
-        filterChainDefinitionMap.put("/**", "authc");
+       // filterChainDefinitionMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
     <description>blog-main的web层</description>
     <!--tomcat下打包,需要打开这个注释-->
-    <!--<packaging>war</packaging>-->
+    <packaging>war</packaging>
 
     <artifactId>blog-main-web</artifactId>
 
@@ -29,6 +29,38 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>jstl</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;jsp&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.tomcat.embed</groupId>-->
+            <!--<artifactId>tomcat-embed-jasper</artifactId>-->
+            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+        <!--</dependency>-->
+        <!-- JSTL (JSP standard Tag Library) JSP 标准标签库 -->
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet</groupId>-->
+            <!--<artifactId>jstl</artifactId>-->
+        <!--</dependency>-->
+        <!--部署spring boot到tomcat,需要打开这个注释-->
+        <!-- Provided -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Compile -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <!-- shiro spring. -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -45,12 +77,7 @@
             <optional>true</optional>
             <scope>true</scope>
         </dependency>
-        <!--部署spring boot到tomcat,需要打开这个注释-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
+
         <!-- dubbo相关,并排除一些 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -113,21 +140,21 @@
                 </configuration>
             </plugin>
             <!--用于打包jar,使用tomcat不需要这个-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <!--支持devtools-->
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>repackage</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--&lt;!&ndash;支持devtools&ndash;&gt;-->
+                <!--<configuration>-->
+                    <!--<fork>true</fork>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <!--解决打包war无web.xml报错-->
             <!--<plugin>-->
                 <!--<artifactId>maven-war-plugin</artifactId>-->

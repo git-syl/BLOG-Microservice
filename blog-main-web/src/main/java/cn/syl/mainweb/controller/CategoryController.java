@@ -13,8 +13,8 @@ import javax.annotation.Resource;
  * @author: syl  Date: 2017/10/28 Email:nerosyl@live.com
  */
 //@RestController()
-@Controller
-@RequestMapping("/admin")
+//@Controller
+//@RequestMapping("/admin")
 public class CategoryController {
     //idea 不能检测RPC的注入??
    // @Resource
