@@ -1,9 +1,19 @@
 package cn.syl.mainweb.controller;
 
+import cn.syl.blogcom.utils.BlogResult;
+import cn.syl.blogcom.utils.CookieUtils;
+import cn.syl.blogmain.service.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.HTML;
 import java.util.Map;
 
 /**
@@ -12,10 +22,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    @RequestMapping("/login")
-    public String login(){
-        return "login";
-    }
+
 
     @RequestMapping("/home")
     public String index(){
@@ -23,8 +30,5 @@ public class AdminController {
     }
 
 
-    @GetMapping("/vcode")
-    public String welcome(Map<String, Object> model) {
-        return "validatecode";
-    }
+
 }

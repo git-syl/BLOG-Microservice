@@ -14,12 +14,18 @@
     <!--<packaging>war</packaging>-->
 
     <dependencies>
+        <!--***项目依赖***-->
         <dependency>
             <groupId>cn.syl</groupId>
             <artifactId>blog-main-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!--***项目依赖***-->
+
+
+
+        <!--***spring boot 相关***-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -28,27 +34,31 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
-        <!-- shiro spring. -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-        </dependency>
-        <!--运行在tomcat需要-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
-        <!--运行低版本tomcat需要-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.tomcat</groupId>-->
-            <!--<artifactId>tomcat-juli</artifactId>-->
-        <!--</dependency>-->
         <!--todo:迁移至spring boot data redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-redis</artifactId>
         </dependency>
+        <!--***spring boot 相关***-->
+
+
+
+        <!--***打包部署***-->
+            <!--运行在tomcat需要-->
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+                <!--<scope>provided</scope>-->
+            <!--</dependency>-->
+            <!--运行低版本tomcat需要-->
+            <!--<dependency>-->
+                <!--<groupId>org.apache.tomcat</groupId>-->
+                <!--<artifactId>tomcat-juli</artifactId>-->
+            <!--</dependency>-->
+        <!--***打包部署***-->
+
+
+
         <!-- dubbo相关,并排除一些 -->
         <dependency>
             <groupId>com.alibaba</groupId>

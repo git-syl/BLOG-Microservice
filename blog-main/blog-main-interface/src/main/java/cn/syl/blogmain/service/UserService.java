@@ -1,5 +1,6 @@
 package cn.syl.blogmain.service;
 
+import cn.syl.blogcom.utils.BlogResult;
 import cn.syl.blogmain.pojo.User;
 import org.springframework.data.domain.Page;
 
@@ -25,5 +26,6 @@ public interface UserService {
     Page<User> findUserByPage(Integer starPage, Integer itemNumber );
 
     Page<User> findUserByPageAndOrder(Integer starPage,Integer itemNumber );
+
 
 }

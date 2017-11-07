@@ -14,6 +14,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,25 +23,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-//@Controller
+@Controller
 public class TestController {
 
-    @RequestMapping("/home")
+   // @Autowired
+    //private Ijedis
+
+    @RequestMapping("/thome")
     public String home(){
         return "starter";
     }
 
-    @RequestMapping({"/", "/index"})
+    @RequestMapping({"/tindex"})
     public String index() {
         return "index";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/tlogin", method = RequestMethod.GET)
     public String login() {
         return "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/tlogin", method = RequestMethod.POST)
     public String login(String username, String password, HttpServletRequest request) {
 
         //String validateCode = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
@@ -87,5 +91,7 @@ public class TestController {
     public String userInfoGGG(){
         return "userInfoGG";
     }
+
+
 
 }

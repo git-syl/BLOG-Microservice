@@ -20,7 +20,7 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource(value = "classpath:dubbo/dubbo-consumer.xml")
 @SpringBootApplication
 //如果在tomcat运行需要打开下面的注释
-public class MangerWebApplication       extends SpringBootServletInitializer {
+public class MangerWebApplication      /* extends SpringBootServletInitializer*/ {
     public static void main(String args[]){
         SpringApplication application = new SpringApplication(MangerWebApplication.class);
         //application.setBannerMode(Banner.Mode.OFF);
@@ -29,8 +29,8 @@ public class MangerWebApplication       extends SpringBootServletInitializer {
 
 
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(MangerWebApplication.class);
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return builder.sources(MangerWebApplication.class);
+//    }
 }

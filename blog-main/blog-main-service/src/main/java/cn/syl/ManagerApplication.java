@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * @author: syl  Date: 2017/10/28 Email:nerosyl@live.com
  */
-@Configuration
+//@Configuration
 //@PropertySource(value = { "classpath:jdbc.properties", "classpath:env.properties",
 //        "classpath:httpclient.properties" })
 @ComponentScan(basePackages = "cn.syl")

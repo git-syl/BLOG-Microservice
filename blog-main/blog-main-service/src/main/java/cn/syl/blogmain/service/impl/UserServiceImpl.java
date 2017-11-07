@@ -1,8 +1,14 @@
 package cn.syl.blogmain.service.impl;
 
+import cn.syl.blogcom.utils.BlogResult;
+import cn.syl.blogcom.utils.JsonUtils;
+import cn.syl.blogcom.utils.ShiroMD5;
 import cn.syl.blogmain.pojo.User;
 import cn.syl.blogmain.repository.UserRepository;
 import cn.syl.blogmain.service.UserService;
+import cn.syl.jedis.IJedis;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -13,6 +19,7 @@ import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author: syl  Date: 2017/11/1 Email:nerosyl@live.com
@@ -20,11 +27,21 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService{
 
+    @Value("${password.salt}")
+    private String salt;
+
+    //user.session=USER_SESSION:
+    @Value("${user.session}")
+    private String USER_SESSION_PRE;
+
+    @Value("${session.expire}")
+    private int sec;
+
     @Resource
     private UserRepository userRepository;
 
-    // @Autowired
-    private JedisCluster jedisCluster;
+    @Autowired
+    private IJedis jedis;
 
     @Override
     public void saveUser(User user) {
@@ -81,4 +98,10 @@ public class UserServiceImpl implements UserService{
         PageRequest pageRequest = new PageRequest(starPage,itemNumber,new Sort(orders));
         return userRepository.findAll(pageRequest);
     }
+
+
+
+
+
+
 }

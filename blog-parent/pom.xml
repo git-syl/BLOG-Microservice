@@ -24,6 +24,7 @@
     <dependencyManagement>
 
         <dependencies>
+
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -32,31 +33,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--spring web 你问我支持不支持-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-redis -->
+
             <!--todo:迁移至:Spring Boot Data Redis Starter-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-redis</artifactId>
                 <version>1.4.7.RELEASE</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>1.5.8.RELEASE</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-freemarker</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
+
             <!--lombok注解库-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -64,6 +48,7 @@
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
             </dependency>
+
             <!-- shiro spring. -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
@@ -75,34 +60,7 @@
                 <artifactId>shiro-ehcache</artifactId>
                 <version>1.2.2</version>
             </dependency>
-            <!-- 热部署支持devtools https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-devtools</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-            <!--部署spring boot到tomcat,需要打开这个注释-->
-            <!--<dependency>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-                <!--<version>${spring.boot.version}</version>-->
-                <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
-            <!--</dependency>-->
-            <!--jsp-->
-            <!--https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper-->
 
-
-            <!-- 加入servlet和jsp的依赖 -->
-            <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>servlet-api</artifactId>-->
-            <!--<version>2.5</version>-->
-            <!--<scope>provided</scope>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>jstl</artifactId>-->
-            <!--</dependency>-->
             <!-- dubbo,zookeeper相关 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -119,25 +77,79 @@
                 <artifactId>zkclient</artifactId>
                 <version>${zkclient.version}</version>
             </dependency>
-            <!-- MySql -->
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.connecotor.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <!--  spring data jpa-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-            <!--spring boot 低版本tomcat启动问题-->
-            <!--<dependency>-->
-            <!--<groupId>org.apache.tomcat</groupId>-->
-            <!--<artifactId>tomcat-juli</artifactId>-->
-            <!--<version>${tomcat.version}</version>-->
-            <!--</dependency>-->
+
+            <!--spring boot 相关 因为官方parent集成了很多,这些注释了*************-->
+
+                <!--spring web 你问我支持不支持-->
+                <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-web</artifactId>-->
+                <!--<version>${spring.boot.version}</version>-->
+                <!--</dependency>-->
+                <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-redis -->
+                <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+                <!--<dependency>-->
+                    <!--<groupId>org.springframework.boot</groupId>-->
+                    <!--<artifactId>spring-boot-starter-test</artifactId>-->
+                    <!--<version>1.5.8.RELEASE</version>-->
+                    <!--<scope>test</scope>-->
+                <!--</dependency>-->
+                <!--<dependency>-->
+                    <!--<groupId>org.springframework.boot</groupId>-->
+                    <!--<artifactId>spring-boot-starter-freemarker</artifactId>-->
+                    <!--<version>${spring.boot.version}</version>-->
+                <!--</dependency>-->
+                <!-- 热部署支持devtools https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+                <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-devtools</artifactId>-->
+                <!--<version>${spring.boot.version}</version>-->
+                <!--</dependency>-->
+                <!--部署spring boot到tomcat,需要打开这个注释-->
+                <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+                <!--<version>${spring.boot.version}</version>-->
+                <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+                <!--</dependency>-->
+                <!--jsp-->
+                <!--https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper-->
+
+
+                <!-- 加入servlet和jsp的依赖 -->
+                <!--<dependency>-->
+                <!--<groupId>javax.servlet</groupId>-->
+                <!--<artifactId>servlet-api</artifactId>-->
+                <!--<version>2.5</version>-->
+                <!--<scope>provided</scope>-->
+                <!--</dependency>-->
+                <!--<dependency>-->
+                <!--<groupId>javax.servlet</groupId>-->
+                <!--<artifactId>jstl</artifactId>-->
+                <!--</dependency>-->
+                <!-- MySql -->
+                <!--<dependency>-->
+                <!--<groupId>mysql</groupId>-->
+                <!--<artifactId>mysql-connector-java</artifactId>-->
+                <!--<version>${mysql.connecotor.version}</version>-->
+                <!--<scope>runtime</scope>-->
+                <!--</dependency>-->
+                <!--  spring data jpa-->
+                <!--<dependency>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-starter-data-jpa</artifactId>-->
+                <!--<version>${spring.boot.version}</version>-->
+                <!--</dependency>-->
+                <!--spring boot 低版本tomcat启动问题-->
+                <!--<dependency>-->
+                <!--<groupId>org.apache.tomcat</groupId>-->
+                <!--<artifactId>tomcat-juli</artifactId>-->
+                <!--<version>${tomcat.version}</version>-->
+                <!--</dependency>-->
+
+            <!--spring boot 相关 因为官方parent集成了很多,这些注释了************* /-->
+
+
         </dependencies>
     </dependencyManagement>
     <!--dependencyManagement仅管理版本号-->
