@@ -16,6 +16,7 @@ public interface UserService {
     Iterable<User> findAll();
     User findUserById(Long id);
     User findUserByUsername(String username);
+    User findUserByToken(String token);
 
     /**
      *
@@ -28,4 +29,5 @@ public interface UserService {
     Page<User> findUserByPageAndOrder(Integer starPage,Integer itemNumber );
 
 
+    void delTokenByCookieToken(String cookieToken);
 }

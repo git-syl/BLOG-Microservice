@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import redis.clients.jedis.JedisCluster;
 
 import javax.annotation.Resource;
@@ -97,6 +98,22 @@ public class UserServiceImpl implements UserService{
         //  orders.add(new Sort.Order(Sort.Direction.ASC,"parentId"));
         PageRequest pageRequest = new PageRequest(starPage,itemNumber,new Sort(orders));
         return userRepository.findAll(pageRequest);
+    }
+
+    @Override
+    public void delTokenByCookieToken(String cookieToken) {
+        Long del = jedis.del(cookieToken);
+        System.err.println("删除redis session token--->"+del);
+    }
+
+    @Override
+    public User findUserByToken(String token){
+        String userString = jedis.get(USER_SESSION_PRE + token);
+        if (!StringUtils.isEmpty(userString)){
+            return JsonUtils.jsonToPojo(userString, User.class);
+        }
+        return null;
+
     }
 
 

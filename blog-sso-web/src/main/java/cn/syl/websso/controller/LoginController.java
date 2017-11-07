@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +33,9 @@ public class LoginController {
     @Value("${user.cookie}")
     private String USE_COOKIE_PRE;
 
+    @Value("${manger.url}")
+    private String REDIRECT_MANGER_URL;
+
     @Autowired
     LoginService loginService;
 
@@ -41,7 +46,8 @@ public class LoginController {
     }
 
     @RequestMapping
-    public String loginPage(){
+    public String loginPage(Model model){
+        model.addAttribute("redirectUrl",REDIRECT_MANGER_URL);
         return "login";
     }
 
@@ -59,10 +65,31 @@ public class LoginController {
         BlogResult result = loginService.login(username, password);
         if (result.getSuccess()==1){
             CookieUtils.setCookie(request,response,USE_COOKIE_PRE,result.getData().toString());
-
         }
+
+
         return  result;
 
     }
+
+    @RequestMapping(value = "/mlogin",produces = { "application/json;charset=UTF-8"})
+    @ResponseBody
+    public BlogResult loginM(String username, String password,String authcode, HttpServletRequest request, HttpServletResponse response) {
+
+        String picCode = request.getSession().getAttribute("key").toString();
+
+        if (!picCode.equals(authcode)){
+            return BlogResult.no("验证码错误");
+        }
+        BlogResult result = loginService.login(username, password);
+        if (result.getSuccess()==1){
+            CookieUtils.setCookie(request,response,USE_COOKIE_PRE,result.getData().toString());
+        }
+
+        return  result;
+
+    }
+
+
 
 }

@@ -45,7 +45,7 @@
 
                 <label for="validatecode" class="col-sm-offset-3 col-sm-2 control-label">AuthCode</label>
                 <div class="col-sm-2">
-                    <input name="authcode" type="password" class="form-control" style="width: 100%" id="validatecode" placeholder="ValidateCode">
+                    <input name="authcode" type="password" class="form-control" style="width: 100%" id="validatecode" placeholder="Code">
                 </div>
                 <div class="col-sm-1">
                     <img id="loginform:vCode" class="img-responsive"  src="${request.contextPath}/admin/vcode"
@@ -76,12 +76,14 @@
 <script src="${request.contextPath}/lib/bootstrap2/js/bootstrap.min.js"></script>
 <script>
     $(function () {
+        var redirectUrl ="${redirectUrl}";
        $("#loginButton").on("click",function () {
 
           $.post("${request.contextPath}/admin/login",$("#loginForm").serialize(),function (data) {
 
               if(data.success==1){
                   alert("登录成功");
+                  window.location = redirectUrl;
                   return;
               }
               alert(data.success+data.msg);

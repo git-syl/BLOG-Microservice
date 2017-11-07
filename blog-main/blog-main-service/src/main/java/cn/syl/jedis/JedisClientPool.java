@@ -30,6 +30,15 @@ public class JedisClientPool implements IJedis {
 		return result;
 	}
 
+	//beta
+	@Override
+	public Long del(String key) {
+		Jedis jedis = jedisPool.getResource();
+		Long result = jedis.del(key);
+		jedis.close();
+		return result;
+	}
+
 	@Override
 	public Boolean exists(String key) {
 		Jedis jedis = jedisPool.getResource();

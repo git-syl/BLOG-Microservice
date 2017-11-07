@@ -23,6 +23,12 @@ public class JedisClientCluster implements IJedis {
 		return jedisCluster.get(key);
 	}
 
+	//beta
+	@Override
+	public Long del(String key) {
+		return jedisCluster.del(key);
+	}
+
 	@Override
 	public Boolean exists(String key) {
 		return jedisCluster.exists(key);

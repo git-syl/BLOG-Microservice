@@ -4,6 +4,7 @@ public interface IJedis {
 
 	String set(String key, String value);
 	String get(String key);
+	Long del(String key);
 	Boolean exists(String key);
 	Long expire(String key, int seconds);
 	Long ttl(String key);

@@ -39,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     IJedis jedis;
 
-    //@Transactional //jackjon no session ?? todo:
+    @Transactional(readOnly = true) //jackjon no session ?? todo: 2 非只读事务会触发 flushed从而更新数据  ?
     //json转化死循环 ? todo:
     //dubbo 接收的entity序列化出错? todo:
     @Override
@@ -61,10 +61,11 @@ public class LoginServiceImpl implements LoginService {
         if (dbpassword.equals(ShiroMD5.md5(password, username + salt))){
             String token = UUID.randomUUID().toString();
             //把用户信息 保存到redis中,为了安全排除密码
-            User user1 = new User();
-            BeanUtils.copyProperties(user,user1); //copy 一份用户信息
-            user1.setPassword(null);
-            String json = JsonUtils.objectToJsonExclude(user1,"exRoleF","roles");
+            user.setPassword(null);
+          //  User user1 = new User();
+           //// BeanUtils.copyProperties(user,user1); //copy 一份用户信息
+           // user1.setPassword(null);
+            String json = JsonUtils.objectToJsonExclude(user,"exRoleF","roles");
             System.err.println("LoginServiceImpl-->afterobjectToJsonExclude");
             jedis.set(USER_SESSION_PRE+token, json);
             //redis过期时间
